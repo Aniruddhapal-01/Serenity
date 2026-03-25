@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Relationship Health — Serenity</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ============ NAVIGATION ============ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">🌿</div>
+      Serenity
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="assessment.html">Assessment</a></li>
+      <li><a href="relationship.html">Relationship</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="dark-toggle" id="darkToggle">🌙</button>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ PAGE HEADER ============ -->
+<div class="page-header">
+  <div class="container">
+    <span class="section-tag">Relationship Wellness</span>
+    <h1>Relationship Health Checker</h1>
+    <p>Reflect honestly on the patterns in your relationship. This tool offers gentle, evidence-informed insights — not judgments.</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="disclaimer-banner" style="margin-top:32px;">
+    <span class="disclaimer-icon">💙</span>
+    <p><strong>This is a reflection tool, not a judgment.</strong> All relationships have strengths and challenges. This checker helps you identify patterns so you can make informed, empowered decisions. Results are entirely private.</p>
+  </div>
+</div>
+
+<!-- ============ MAIN LAYOUT ============ -->
+<div class="container">
+  <div class="relationship-grid">
+
+    <!-- QUESTIONS FORM -->
+    <div class="rel-form-section" id="relForm">
+
+      <!-- Communication Section -->
+      <div class="rel-category">
+        <div class="rel-category-header">
+          <span>💬</span>
+          <div>
+            <h3>Communication</h3>
+            <p>How openly and safely do you communicate?</p>
+          </div>
+        </div>
+        <div class="rel-questions" id="commQuestions"></div>
+      </div>
+
+      <!-- Trust Section -->
+      <div class="rel-category">
+        <div class="rel-category-header">
+          <span>🤝</span>
+          <div>
+            <h3>Trust & Respect</h3>
+            <p>How safe, respected, and valued do you feel?</p>
+          </div>
+        </div>
+        <div class="rel-questions" id="trustQuestions"></div>
+      </div>
+
+      <!-- Conflict Section -->
+      <div class="rel-category">
+        <div class="rel-category-header">
+          <span>⚖️</span>
+          <div>
+            <h3>Conflict & Growth</h3>
+            <p>How do you navigate disagreements together?</p>
+          </div>
+        </div>
+        <div class="rel-questions" id="conflictQuestions"></div>
+      </div>
+
+      <div style="display:flex;justify-content:flex-end;padding:8px 0 40px;">
+        <button class="btn btn-primary btn-lg" onclick="submitRelationship()">See My Results 💚</button>
+      </div>
+    </div>
+
+    <!-- RESULT SIDEBAR -->
+    <div class="rel-sidebar">
+      <div class="rel-result-card">
+        <div id="resultIcon" class="rel-icon-big">💞</div>
+        <h3 style="margin-bottom:8px;font-size:1rem;color:var(--text-soft);">Relationship Health</h3>
+        <div class="rel-result-level" id="relResultLevel">Answer the questions</div>
+        <p style="font-size:0.85rem;color:var(--text-soft);" id="relResultDesc">Fill out all sections to see your personalized relationship health summary.</p>
+
+        <!-- Score Bars -->
+        <div class="rel-score-bars" id="scoreBars">
+          <div class="score-bar-row">
+            <div class="score-bar-label">
+              <span>💬 Communication</span>
+              <span id="commScore">—</span>
+            </div>
+            <div class="score-bar-track">
+              <div class="score-bar-fill fill-comm" id="commBar" style="width:0%"></div>
+            </div>
+          </div>
+          <div class="score-bar-row">
+            <div class="score-bar-label">
+              <span>🤝 Trust</span>
+              <span id="trustScore">—</span>
+            </div>
+            <div class="score-bar-track">
+              <div class="score-bar-fill fill-trust" id="trustBar" style="width:0%"></div>
+            </div>
+          </div>
+          <div class="score-bar-row">
+            <div class="score-bar-label">
+              <span>⚖️ Conflict</span>
+              <span id="conflictScore">—</span>
+            </div>
+            <div class="score-bar-track">
+              <div class="score-bar-fill fill-conflict" id="conflictBar" style="width:0%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tips Section -->
+        <div class="rel-tips" id="relTips" style="display:none;">
+          <h4>💡 Personalized Tips</h4>
+          <div id="tipsList"></div>
+        </div>
+
+        <!-- Red Flags -->
+        <div class="red-flags" id="redFlags">
+          <h4>⚠️ Signs to Watch For</h4>
+          <div id="redFlagsList"></div>
+        </div>
+
+        <!-- Action Buttons (shown after result) -->
+        <div id="relActions" style="display:none;margin-top:20px;display:flex;flex-direction:column;gap:10px;">
+          <button class="btn btn-secondary btn-sm" onclick="retakeRelationship()" style="width:100%;">↩ Retake Assessment</button>
+          <a href="assessment.html" class="btn btn-ghost btn-sm" style="width:100%;text-align:center;">Mental Health Check →</a>
+        </div>
+      </div>
+
+      <!-- Healthy Relationship Guide -->
+      <div class="sidebar-card" style="margin-top:20px;">
+        <h4 style="margin-bottom:16px;">🌱 Signs of a Healthy Relationship</h4>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;gap:10px;font-size:0.85rem;color:var(--text-mid);">
+            <span style="color:var(--sage);font-weight:700;">✓</span>
+            Both partners feel heard and valued
+          </div>
+          <div style="display:flex;gap:10px;font-size:0.85rem;color:var(--text-mid);">
+            <span style="color:var(--sage);font-weight:700;">✓</span>
+            Conflicts are resolved with respect
+          </div>
+          <div style="display:flex;gap:10px;font-size:0.85rem;color:var(--text-mid);">
+            <span style="color:var(--sage);font-weight:700;">✓</span>
+            Individual boundaries are respected
+          </div>
+          <div style="display:flex;gap:10px;font-size:0.85rem;color:var(--text-mid);">
+            <span style="color:var(--sage);font-weight:700;">✓</span>
+            Trust is built through consistency
+          </div>
+          <div style="display:flex;gap:10px;font-size:0.85rem;color:var(--text-mid);">
+            <span style="color:var(--sage);font-weight:700;">✓</span>
+            Both partners support each other's growth
+          </div>
+          <div style="display:flex;gap:10px;font-size:0.85rem;color:var(--text-mid);">
+            <span style="color:var(--sage);font-weight:700;">✓</span>
+            You feel free to be your authentic self
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none;padding-top:0;">
+      <p>© 2025 Serenity — Wellness tool. Not a clinical service.</p>
+      <p>💙 Your answers are private</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Chatbot -->
+<div class="chatbot-fab">
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+      <div class="chat-avatar">🌿</div>
+      <div class="chat-header-info"><h4>Sage</h4><p>Your wellness companion</p></div>
+      <button class="chat-close" id="chatClose">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-quick-replies" id="quickReplies"></div>
+    <div class="chat-input-row">
+      <input type="text" class="chat-input" id="chatInput" placeholder="Type a message..." />
+      <button class="chat-send" id="chatSend">→</button>
+    </div>
+  </div>
+  <button class="chat-toggle-btn" id="chatToggle">💬</button>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="questions.js"></script>
+<script src="script.js"></script>
+<script>
+  // ============================================================
+  // RELATIONSHIP PAGE LOGIC
+  // ============================================================
+
+  let relAnswers = {};
+
+  function buildRelQuestions() {
+    const cats = [
+      { id: "commQuestions", data: RELATIONSHIP_QUESTIONS.communication },
+      { id: "trustQuestions", data: RELATIONSHIP_QUESTIONS.trust },
+      { id: "conflictQuestions", data: RELATIONSHIP_QUESTIONS.conflict },
+    ];
+
+    cats.forEach(({ id, data }) => {
+      const container = document.getElementById(id);
+      data.questions.forEach((q) => {
+        container.innerHTML += buildRelQuestionHTML(q);
+      });
+    });
+  }
+
+  function buildRelQuestionHTML(q) {
+    const scales = RELATIONSHIP_SCALE.map(
+      (s) => `<button type="button" class="scale-btn" data-qid="${q.id}" data-value="${s.value}" onclick="selectScale(this)">${s.label}</button>`
+    ).join("");
+
+    return `
+      <div class="rel-question" id="rq-${q.id}">
+        <h4>${q.text}</h4>
+        <div class="scale-options">${scales}</div>
+      </div>`;
+  }
+
+  function selectScale(btn) {
+    const qid = btn.dataset.qid;
+    const value = parseInt(btn.dataset.value);
+
+    // Clear siblings
+    btn.closest(".scale-options").querySelectorAll(".scale-btn").forEach((b) => b.classList.remove("selected"));
+    btn.classList.add("selected");
+
+    relAnswers[qid] = value;
+    updateLiveScore();
+  }
+
+  function updateLiveScore() {
+    const commScore = calcCategoryScore("communication");
+    const trustScore = calcCategoryScore("trust");
+    const conflictScore = calcCategoryScore("conflict");
+
+    const commMax = RELATIONSHIP_QUESTIONS.communication.questions.length * 4;
+    const trustMax = RELATIONSHIP_QUESTIONS.trust.questions.length * 4;
+    const conflictMax = RELATIONSHIP_QUESTIONS.conflict.questions.length * 4;
+
+    if (commScore !== null) {
+      document.getElementById("commScore").textContent = `${Math.round((commScore / commMax) * 100)}%`;
+      document.getElementById("commBar").style.width = `${(commScore / commMax) * 100}%`;
+    }
+    if (trustScore !== null) {
+      document.getElementById("trustScore").textContent = `${Math.round((trustScore / trustMax) * 100)}%`;
+      document.getElementById("trustBar").style.width = `${(trustScore / trustMax) * 100}%`;
+    }
+    if (conflictScore !== null) {
+      document.getElementById("conflictScore").textContent = `${Math.round((conflictScore / conflictMax) * 100)}%`;
+      document.getElementById("conflictBar").style.width = `${(conflictScore / conflictMax) * 100}%`;
+    }
+  }
+
+  function calcCategoryScore(category) {
+    const qs = RELATIONSHIP_QUESTIONS[category].questions;
+    if (qs.some((q) => relAnswers[q.id] === undefined)) return null;
+
+    return qs.reduce((sum, q) => {
+      const val = relAnswers[q.id];
+      // For negative questions, invert the score
+      return sum + (q.positiveDirection ? val : 4 - val);
+    }, 0);
+  }
+
+  function submitRelationship() {
+    // Validate all answered
+    const allQs = [
+      ...RELATIONSHIP_QUESTIONS.communication.questions,
+      ...RELATIONSHIP_QUESTIONS.trust.questions,
+      ...RELATIONSHIP_QUESTIONS.conflict.questions,
+    ];
+    const unanswered = allQs.filter((q) => relAnswers[q.id] === undefined);
+
+    if (unanswered.length > 0) {
+      showToast(`Please answer all questions (${unanswered.length} remaining)`, "warning");
+      document.getElementById(`rq-${unanswered[0].id}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+
+    const commScore = calcCategoryScore("communication");
+    const trustScore = calcCategoryScore("trust");
+    const conflictScore = calcCategoryScore("conflict");
+
+    const commMax = RELATIONSHIP_QUESTIONS.communication.questions.length * 4;
+    const trustMax = RELATIONSHIP_QUESTIONS.trust.questions.length * 4;
+    const conflictMax = RELATIONSHIP_QUESTIONS.conflict.questions.length * 4;
+    const totalMax = commMax + trustMax + conflictMax;
+
+    const totalScore = commScore + trustScore + conflictScore;
+    const percentage = (totalScore / totalMax) * 100;
+
+    // Determine result
+    let result;
+    if (percentage >= RELATIONSHIP_RESULTS.healthy.min) {
+      result = RELATIONSHIP_RESULTS.healthy;
+    } else if (percentage >= RELATIONSHIP_RESULTS.attention.min) {
+      result = RELATIONSHIP_RESULTS.attention;
+    } else {
+      result = RELATIONSHIP_RESULTS.toxic;
+    }
+
+    showRelResults(result, { commScore, trustScore, conflictScore, commMax, trustMax, conflictMax, percentage });
+    showToast("Results ready! See your relationship health summary 💚", "success");
+  }
+
+  function showRelResults(result, scores) {
+    document.getElementById("resultIcon").textContent = result.icon;
+    document.getElementById("relResultLevel").textContent = result.label;
+    document.getElementById("relResultLevel").style.color = result.color;
+    document.getElementById("relResultDesc").textContent = result.description;
+
+    // Bars
+    document.getElementById("commScore").textContent = `${Math.round((scores.commScore / scores.commMax) * 100)}%`;
+    document.getElementById("commBar").style.width = `${(scores.commScore / scores.commMax) * 100}%`;
+    document.getElementById("trustScore").textContent = `${Math.round((scores.trustScore / scores.trustMax) * 100)}%`;
+    document.getElementById("trustBar").style.width = `${(scores.trustScore / scores.trustMax) * 100}%`;
+    document.getElementById("conflictScore").textContent = `${Math.round((scores.conflictScore / scores.conflictMax) * 100)}%`;
+    document.getElementById("conflictBar").style.width = `${(scores.conflictScore / scores.conflictMax) * 100}%`;
+
+    // Tips
+    const tipsList = document.getElementById("tipsList");
+    tipsList.innerHTML = result.tips.map((tip) => `
+      <div class="rel-tip">
+        <span class="rel-tip-dot"></span>
+        ${tip}
+      </div>`
+    ).join("");
+    document.getElementById("relTips").style.display = "block";
+
+    // Red flags
+    if (result.showRedFlags) {
+      const redFlagsEl = document.getElementById("redFlags");
+      const redFlagsList = document.getElementById("redFlagsList");
+      redFlagsList.innerHTML = RED_FLAGS.map((f) => `
+        <div class="red-flag-item">${f}</div>`
+      ).join("");
+      redFlagsEl.classList.add("show");
+    }
+
+    // Show actions
+    document.getElementById("relActions").style.display = "flex";
+
+    // Scroll to sidebar
+    document.querySelector(".rel-result-card").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function retakeRelationship() {
+    relAnswers = {};
+    document.querySelectorAll(".scale-btn").forEach((b) => b.classList.remove("selected"));
+    document.getElementById("resultIcon").textContent = "💞";
+    document.getElementById("relResultLevel").textContent = "Answer the questions";
+    document.getElementById("relResultLevel").style.color = "";
+    document.getElementById("relResultDesc").textContent = "Fill out all sections to see your personalized relationship health summary.";
+    document.getElementById("relTips").style.display = "none";
+    document.getElementById("redFlags").classList.remove("show");
+    document.getElementById("relActions").style.display = "none";
+    ["commScore", "trustScore", "conflictScore"].forEach((id) => (document.getElementById(id).textContent = "—"));
+    ["commBar", "trustBar", "conflictBar"].forEach((id) => (document.getElementById(id).style.width = "0%"));
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  // ============================================================
+  buildRelQuestions();
+</script>
+</body>
+</html>

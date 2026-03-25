@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Self-Assessment — Serenity</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ============ NAVIGATION ============ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">🌿</div>
+      Serenity
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="assessment.html">Assessment</a></li>
+      <li><a href="relationship.html">Relationship</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="dark-toggle" id="darkToggle">🌙</button>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ PAGE HEADER ============ -->
+<div class="page-header">
+  <div class="container">
+    <span class="section-tag">Wellness Assessment</span>
+    <h1>Understand Your Mental Wellbeing</h1>
+    <p>Thoughtful questions inspired by validated wellness scales. Honest, compassionate, and completely private.</p>
+  </div>
+</div>
+
+<!-- ============ DISCLAIMER ============ -->
+<div class="container">
+  <div class="disclaimer-banner" style="margin-top:32px;">
+    <span class="disclaimer-icon">ℹ️</span>
+    <p><strong>Not a Clinical Tool</strong> This assessment is for general wellness reflection only. It does not diagnose any mental health condition. Please consult a qualified mental health professional for clinical concerns.</p>
+  </div>
+</div>
+
+<!-- ============ ASSESSMENT LAYOUT ============ -->
+<div class="container">
+  <div class="assessment-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="assessment-sidebar">
+      <div class="sidebar-card">
+        <h4>📋 Your Progress</h4>
+        <div class="progress-container">
+          <div class="progress-label">
+            <span>Questions answered</span>
+            <span id="progressText">0 / 16</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+        <ul class="sidebar-section-list" id="sectionList">
+          <li class="active" data-tab="anxiety">
+            😰 Anxiety Section
+            <span class="q-status" id="anxietyStatus">0/7</span>
+          </li>
+          <li data-tab="depression">
+            🌧 Mood Section
+            <span class="q-status" id="depressionStatus">0/9</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-card">
+        <h4>💡 Tips for Accuracy</h4>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+          <li style="font-size:0.85rem;color:var(--text-soft);display:flex;gap:8px;"><span>🔒</span>Answer as honestly as you can — your data never leaves your device.</li>
+          <li style="font-size:0.85rem;color:var(--text-soft);display:flex;gap:8px;"><span>📅</span>Reflect on the past 2 weeks when answering.</li>
+          <li style="font-size:0.85rem;color:var(--text-soft);display:flex;gap:8px;"><span>🌿</span>There are no right or wrong answers.</li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="assessment-main">
+
+      <!-- QUESTION FORM -->
+      <div id="assessmentForm">
+        <div class="tab-nav">
+          <button class="tab-btn active" id="tabAnxiety" onclick="switchTab('anxiety')">😰 Anxiety (GAD-7)</button>
+          <button class="tab-btn" id="tabDepression" onclick="switchTab('depression')">🌧 Mood (PHQ-9)</button>
+        </div>
+
+        <!-- ANXIETY TAB -->
+        <div class="tab-content active" id="tab-anxiety">
+          <div id="anxietyQuestions"></div>
+
+          <div class="submit-row">
+            <p style="font-size:0.85rem;color:var(--text-soft);">Complete both sections for full results</p>
+            <button class="btn btn-primary" onclick="switchTab('depression')">Next: Mood Section →</button>
+          </div>
+        </div>
+
+        <!-- DEPRESSION TAB -->
+        <div class="tab-content" id="tab-depression">
+          <div id="depressionQuestions"></div>
+
+          <div class="submit-row">
+            <button class="btn btn-secondary" onclick="switchTab('anxiety')">← Back</button>
+            <button class="btn btn-primary" id="submitBtn" onclick="submitAssessment()">View My Results 🌿</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- RESULTS PANEL -->
+      <div class="results-panel" id="resultsPanel">
+
+        <!-- Score Cards -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px;" id="scoreCards">
+          <!-- Injected by JS -->
+        </div>
+
+        <!-- Suggestions -->
+        <div class="sidebar-card" style="margin-bottom:24px;">
+          <h3 style="margin-bottom:8px;font-size:1.1rem;">🌱 Your Personalized Wellness Plan</h3>
+          <p style="font-size:0.9rem;margin-bottom:24px;">Based on your responses, here are evidence-informed strategies tailored for you.</p>
+          <div class="suggestions-grid" id="suggestionsGrid"></div>
+        </div>
+
+        <!-- Emergency Alert -->
+        <div class="emergency-alert" id="emergencyAlert">
+          <h3>🚨 Please Reach Out for Support</h3>
+          <p style="color:var(--text-mid);margin-bottom:16px;">Your responses suggest you may be experiencing significant distress. <strong>This platform is not a substitute for professional help.</strong> Please consider reaching out to a licensed mental health professional or crisis service.</p>
+          <div class="helplines" id="helplines"></div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:28px;padding-top:24px;border-top:1px solid var(--border-soft);">
+          <button class="btn btn-secondary" onclick="retakeAssessment()">↩ Retake Assessment</button>
+          <a href="dashboard.html" class="btn btn-primary">Track My Mood →</a>
+          <a href="relationship.html" class="btn btn-ghost">Relationship Check →</a>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer" style="margin-top:40px;">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none;padding-top:0;">
+      <p>© 2025 Serenity — General wellness tool only. Not a medical product.</p>
+      <p>💙 Your data stays on your device</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Chatbot -->
+<div class="chatbot-fab">
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+      <div class="chat-avatar">🌿</div>
+      <div class="chat-header-info"><h4>Sage</h4><p>Your wellness companion</p></div>
+      <button class="chat-close" id="chatClose">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-quick-replies" id="quickReplies"></div>
+    <div class="chat-input-row">
+      <input type="text" class="chat-input" id="chatInput" placeholder="Type a message..." />
+      <button class="chat-send" id="chatSend">→</button>
+    </div>
+  </div>
+  <button class="chat-toggle-btn" id="chatToggle">💬</button>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="questions.js"></script>
+<script src="script.js"></script>
+<script>
+  // ============================================================
+  // ASSESSMENT PAGE LOGIC
+  // ============================================================
+
+  let answers = {};
+
+  function buildQuestions() {
+    // Anxiety Questions
+    const anxietyContainer = document.getElementById("anxietyQuestions");
+    ANXIETY_QUESTIONS.forEach((q, idx) => {
+      anxietyContainer.innerHTML += buildQuestionHTML(q, idx + 1);
+    });
+
+    // Depression Questions
+    const depressionContainer = document.getElementById("depressionQuestions");
+    DEPRESSION_QUESTIONS.forEach((q, idx) => {
+      depressionContainer.innerHTML += buildQuestionHTML(q, idx + 1);
+    });
+
+    // Add change listeners
+    document.querySelectorAll('input[type="radio"]').forEach((radio) => {
+      radio.addEventListener("change", () => {
+        answers[radio.name] = parseInt(radio.value);
+        updateProgress();
+      });
+    });
+  }
+
+  function buildQuestionHTML(q, num) {
+    const options = ASSESSMENT_OPTIONS.map(
+      (opt) => `
+      <label class="option-label">
+        <input type="radio" name="${q.id}" value="${opt.value}" />
+        <span class="option-radio"></span>
+        ${opt.label}
+      </label>`
+    ).join("");
+
+    return `
+      <div class="question-block" id="qblock-${q.id}">
+        <div class="question-num">Question ${num}</div>
+        <p class="question-text">${q.text}</p>
+        <div class="options-grid">${options}</div>
+      </div>`;
+  }
+
+  function updateProgress() {
+    const anxietyAnswered = ANXIETY_QUESTIONS.filter((q) => answers[q.id] !== undefined).length;
+    const depressionAnswered = DEPRESSION_QUESTIONS.filter((q) => answers[q.id] !== undefined).length;
+    const total = ANXIETY_QUESTIONS.length + DEPRESSION_QUESTIONS.length;
+    const answered = anxietyAnswered + depressionAnswered;
+
+    document.getElementById("progressFill").style.width = `${(answered / total) * 100}%`;
+    document.getElementById("progressText").textContent = `${answered} / ${total}`;
+    document.getElementById("anxietyStatus").textContent = `${anxietyAnswered}/7`;
+    document.getElementById("depressionStatus").textContent = `${depressionAnswered}/9`;
+  }
+
+  function switchTab(tab) {
+    document.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
+    document.querySelectorAll(".tab-content").forEach((c) => c.classList.remove("active"));
+
+    document.getElementById(`tab-${tab}`).classList.add("active");
+    document.getElementById(`tab${tab.charAt(0).toUpperCase() + tab.slice(1)}`).classList.add("active");
+
+    // Update sidebar
+    document.querySelectorAll(".sidebar-section-list li").forEach((li) => {
+      li.classList.toggle("active", li.dataset.tab === tab);
+    });
+  }
+
+  function submitAssessment() {
+    // Validate all answered
+    const allQuestions = [...ANXIETY_QUESTIONS, ...DEPRESSION_QUESTIONS];
+    const unanswered = allQuestions.filter((q) => answers[q.id] === undefined);
+
+    if (unanswered.length > 0) {
+      showToast(`Please answer all questions (${unanswered.length} remaining)`, "warning");
+      // Highlight first unanswered
+      const firstId = unanswered[0].id;
+      document.getElementById(`qblock-${firstId}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
+      document.getElementById(`qblock-${firstId}`).style.borderColor = "#E65100";
+      setTimeout(() => {
+        document.getElementById(`qblock-${firstId}`).style.borderColor = "";
+      }, 2000);
+      return;
+    }
+
+    // Calculate scores
+    const anxietyScore = ANXIETY_QUESTIONS.reduce((sum, q) => sum + (answers[q.id] || 0), 0);
+    const depressionScore = DEPRESSION_QUESTIONS.reduce((sum, q) => sum + (answers[q.id] || 0), 0);
+
+    // Get levels
+    const anxietyLevel = getLevel(anxietyScore, ANXIETY_LEVELS);
+    const depressionLevel = getLevel(depressionScore, DEPRESSION_LEVELS);
+
+    // Show results
+    showResults(anxietyScore, depressionScore, anxietyLevel, depressionLevel);
+
+    // Save to localStorage
+    saveToStorage("serenity_last_assessment", {
+      date: new Date().toISOString(),
+      anxietyScore,
+      depressionScore,
+      anxietyLevel: anxietyLevel.label,
+      depressionLevel: depressionLevel.label,
+    });
+  }
+
+  function getLevel(score, levels) {
+    if (score <= levels.low.max) return { ...levels.low, key: "low" };
+    if (score <= levels.moderate.max) return { ...levels.moderate, key: "moderate" };
+    return { ...levels.high, key: "high" };
+  }
+
+  function showResults(anxScore, depScore, anxLevel, depLevel) {
+    document.getElementById("assessmentForm").style.display = "none";
+    const panel = document.getElementById("resultsPanel");
+    panel.classList.add("show");
+
+    // Score cards
+    const maxAnxiety = ANXIETY_QUESTIONS.length * 3;
+    const maxDepression = DEPRESSION_QUESTIONS.length * 3;
+
+    document.getElementById("scoreCards").innerHTML = `
+      ${buildScoreCard("Anxiety", anxScore, maxAnxiety, anxLevel, ANXIETY_LEVELS)}
+      ${buildScoreCard("Mood", depScore, maxDepression, depLevel, DEPRESSION_LEVELS)}
+    `;
+
+    // Animate rings
+    setTimeout(() => {
+      animateRing("ring-anxiety", anxScore, maxAnxiety, anxLevel.color);
+      animateRing("ring-depression", depScore, maxDepression, depLevel.color);
+    }, 200);
+
+    // Suggestions (combine both)
+    const anxietySuggestions = SUGGESTIONS.anxiety[anxLevel.key].suggestions;
+    const depressionSuggestions = SUGGESTIONS.depression[depLevel.key].suggestions;
+
+    // Deduplicate and combine
+    const combined = [...anxietySuggestions];
+    depressionSuggestions.forEach((s) => {
+      if (!combined.find((c) => c.title === s.title)) combined.push(s);
+    });
+
+    const grid = document.getElementById("suggestionsGrid");
+    grid.innerHTML = combined.map((s) => `
+      <div class="suggestion-card">
+        <div class="suggestion-icon">${s.icon}</div>
+        <h4>${s.title}</h4>
+        <p>${s.text}</p>
+      </div>`
+    ).join("");
+
+    // Emergency alert for high scores
+    if (anxLevel.key === "high" || depLevel.key === "high") {
+      document.getElementById("emergencyAlert").classList.add("show");
+      document.getElementById("helplines").innerHTML = `
+        <div class="helpline-card">
+          <div class="name">iCall (India)</div>
+          <div class="number">9152987821</div>
+          <div class="desc">Mon–Sat, 8am–10pm</div>
+        </div>
+        <div class="helpline-card">
+          <div class="name">Vandrevala Foundation</div>
+          <div class="number">1860-2662-345</div>
+          <div class="desc">24/7 support</div>
+        </div>
+        <div class="helpline-card">
+          <div class="name">NIMHANS Helpline</div>
+          <div class="number">080-46110007</div>
+          <div class="desc">Mental health support</div>
+        </div>
+        <div class="helpline-card">
+          <div class="name">Snehi (Crisis)</div>
+          <div class="number">044-24640050</div>
+          <div class="desc">Emotional support</div>
+        </div>`;
+    }
+
+    panel.scrollIntoView({ behavior: "smooth", block: "start" });
+    showToast("Assessment complete! View your personalized results below 🌿", "success");
+  }
+
+  function buildScoreCard(label, score, max, level, levels) {
+    const pct = (score / max) * 100;
+    const circum = 2 * Math.PI * 54;
+    const id = `ring-${label.toLowerCase()}`;
+
+    return `
+      <div class="results-header" style="border:1px solid var(--border-soft);">
+        <div class="score-ring">
+          <svg viewBox="0 0 120 120">
+            <circle class="score-ring-bg" cx="60" cy="60" r="54"/>
+            <circle class="score-ring-fill" id="${id}" cx="60" cy="60" r="54"
+              stroke="${level.color}"
+              stroke-dasharray="${circum}"
+              stroke-dashoffset="${circum}"/>
+          </svg>
+          <div class="score-number">
+            <div class="score-val" style="color:${level.color}">${score}</div>
+            <div class="score-max">/${max}</div>
+          </div>
+        </div>
+        <div>${level.emoji}</div>
+        <span class="result-level" style="background:${level.color}20;color:${level.color}">${level.label}</span>
+        <h3 style="margin-bottom:8px;font-size:1rem;">${label} Assessment</h3>
+        <p class="result-description" style="font-size:0.88rem;">${SUGGESTIONS[label.toLowerCase()][level.key].description}</p>
+      </div>`;
+  }
+
+  function animateRing(id, score, max, color) {
+    const ring = document.getElementById(id);
+    if (!ring) return;
+    const circum = 2 * Math.PI * 54;
+    const pct = score / max;
+    const offset = circum * (1 - pct);
+    ring.style.strokeDashoffset = offset;
+  }
+
+  function retakeAssessment() {
+    answers = {};
+    document.querySelectorAll('input[type="radio"]').forEach((r) => (r.checked = false));
+    document.getElementById("assessmentForm").style.display = "block";
+    document.getElementById("resultsPanel").classList.remove("show");
+    document.getElementById("emergencyAlert").classList.remove("show");
+    updateProgress();
+    switchTab("anxiety");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  // ============================================================
+  buildQuestions();
+</script>
+</body>
+</html>

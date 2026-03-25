@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Serenity — Mental Wellness Companion</title>
+  <meta name="description" content="A gentle, science-inspired mental wellness companion to help you understand, track, and nurture your mental health." />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<!-- ============ NAVIGATION ============ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">🌿</div>
+      Serenity
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="assessment.html">Assessment</a></li>
+      <li><a href="relationship.html">Relationship</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button class="dark-toggle" id="darkToggle" title="Toggle dark mode">🌙</button>
+      <a href="assessment.html" class="btn btn-primary btn-sm">Get Started</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          Your Wellness, Your Journey
+        </div>
+        <h1>Nurture Your <span>Mental Wellbeing</span> with Gentle Guidance</h1>
+        <p class="hero-desc">
+          Serenity helps you understand your emotional health, track your mood patterns, and discover personalized strategies — all in a safe, non-judgmental space.
+        </p>
+        <div class="hero-actions">
+          <a href="assessment.html" class="btn btn-primary btn-lg">Start Assessment →</a>
+          <a href="dashboard.html" class="btn btn-secondary btn-lg">Track My Mood</a>
+        </div>
+
+        <div class="hero-stats">
+          <div>
+            <div class="hero-stat-num">4</div>
+            <div class="hero-stat-label">Wellness Tools</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">16+</div>
+            <div class="hero-stat-label">Assessment Questions</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">100%</div>
+            <div class="hero-stat-label">Private & Local</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Visual -->
+      <div class="hero-visual">
+        <div class="hero-bg-circle"></div>
+        <div class="hero-card-stack">
+          <div class="float-card">
+            <div class="float-card-icon">😌</div>
+            <div class="float-card-title">Mood Today</div>
+            <div class="float-card-text">Feeling calm & centered</div>
+          </div>
+          <div class="float-card">
+            <div class="float-card-icon">📊</div>
+            <div class="float-card-title">Wellness Score</div>
+            <div class="float-card-text">Anxiety: Low · 3/21</div>
+          </div>
+          <div class="float-card">
+            <div class="float-card-icon">🔥</div>
+            <div class="float-card-title">7-Day Streak</div>
+            <div class="float-card-text">Keep logging your mood!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DISCLAIMER ============ -->
+<section style="padding: 0 0 40px;">
+  <div class="container">
+    <div class="disclaimer-banner">
+      <span class="disclaimer-icon">ℹ️</span>
+      <p>
+        <strong>Important Disclaimer</strong>
+        Serenity provides general wellness insights based on self-reported information. It is NOT a medical diagnosis tool and does not replace professional mental health care. If you are experiencing a mental health crisis, please contact a licensed professional or crisis helpline immediately.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURES ============ -->
+<section class="section" style="padding-top: 40px;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">What Serenity Offers</span>
+      <h2>Tools built with care, for every step of your journey</h2>
+      <p>From self-assessment to daily mood tracking, each feature is designed to help you cultivate awareness and resilience.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card sage fade-in">
+        <div class="feature-icon sage">🧠</div>
+        <h3>Mental Health Assessment</h3>
+        <p>Reflect on anxiety and mood patterns using questions inspired by validated wellness scales. Get a personalized, compassionate report.</p>
+        <a href="assessment.html" class="feature-link">Take Assessment →</a>
+      </div>
+
+      <div class="feature-card teal fade-in">
+        <div class="feature-icon teal">💡</div>
+        <h3>Smart Recommendations</h3>
+        <p>Receive tailored wellness strategies based on your unique responses — from breathing techniques to sleep habits and professional guidance.</p>
+        <a href="assessment.html" class="feature-link">Get Suggestions →</a>
+      </div>
+
+      <div class="feature-card lavender fade-in">
+        <div class="feature-icon lavender">💞</div>
+        <h3>Relationship Health Check</h3>
+        <p>Assess communication patterns, trust, and conflict dynamics in your relationship with thoughtful, evidence-based questions.</p>
+        <a href="relationship.html" class="feature-link">Check Relationship →</a>
+      </div>
+
+      <div class="feature-card peach fade-in">
+        <div class="feature-icon peach">📈</div>
+        <h3>Mood Tracker Dashboard</h3>
+        <p>Log your daily emotional state, add personal notes, and visualize mood trends over time to discover patterns and triggers.</p>
+        <a href="dashboard.html" class="feature-link">Track Mood →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="section" style="background: var(--sage-pale);">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Simple & Private</span>
+      <h2>How Serenity works</h2>
+      <p>All your data stays on your device. No accounts, no cloud, no tracking — just you and your wellness.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; text-align: center;">
+      <div class="fade-in">
+        <div style="width:64px;height:64px;background:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin:0 auto 16px;box-shadow:var(--shadow-sm);">📋</div>
+        <h4 style="margin-bottom:8px;">Answer Questions</h4>
+        <p style="font-size:0.9rem;">Complete short, thoughtful questionnaires at your own pace.</p>
+      </div>
+      <div class="fade-in" style="display:flex;align-items:center;font-size:1.5rem;color:var(--sage-light);justify-content:center;">→</div>
+      <div class="fade-in">
+        <div style="width:64px;height:64px;background:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin:0 auto 16px;box-shadow:var(--shadow-sm);">📊</div>
+        <h4 style="margin-bottom:8px;">See Your Score</h4>
+        <p style="font-size:0.9rem;">Get a clear, compassionate summary of your wellness status.</p>
+      </div>
+      <div class="fade-in" style="display:flex;align-items:center;font-size:1.5rem;color:var(--sage-light);justify-content:center;">→</div>
+      <div class="fade-in">
+        <div style="width:64px;height:64px;background:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin:0 auto 16px;box-shadow:var(--shadow-sm);">🌱</div>
+        <h4 style="margin-bottom:8px;">Take Action</h4>
+        <p style="font-size:0.9rem;">Receive personalized wellness strategies to start applying today.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WELLNESS TIPS ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Daily Wellness</span>
+      <h2>Small habits, meaningful change</h2>
+      <p>Science-backed micro-practices you can weave into everyday life.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+      <div class="card fade-in">
+        <div class="card-icon" style="background:rgba(168,196,180,0.15);">🌬️</div>
+        <h4>Box Breathing</h4>
+        <p style="font-size:0.9rem;margin-top:8px;">Inhale 4 sec → Hold 4 sec → Exhale 4 sec → Hold 4 sec. Repeat 4 cycles to calm your nervous system in under 2 minutes.</p>
+      </div>
+      <div class="card fade-in">
+        <div class="card-icon" style="background:rgba(123,179,212,0.15);">📝</div>
+        <h4>Morning Journaling</h4>
+        <p style="font-size:0.9rem;margin-top:8px;">Write 3 things you're grateful for and 1 intention each morning. This practice rewires neural pathways toward positivity over time.</p>
+      </div>
+      <div class="card fade-in">
+        <div class="card-icon" style="background:rgba(155,139,180,0.15);">🚶</div>
+        <h4>10-Minute Movement</h4>
+        <p style="font-size:0.9rem;margin-top:8px;">A brisk 10-minute walk releases endorphins, reduces cortisol, and improves focus. No gym required — just fresh air and intention.</p>
+      </div>
+      <div class="card fade-in">
+        <div class="card-icon" style="background:rgba(232,165,152,0.2);">😴</div>
+        <h4>Sleep Consistency</h4>
+        <p style="font-size:0.9rem;margin-top:8px;">Going to bed and waking at the same time (even weekends) is the single most impactful sleep habit for mental health.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="section" style="padding-bottom: 100px;">
+  <div class="container">
+    <div style="background: linear-gradient(135deg, var(--sage), var(--teal)); border-radius: var(--radius-xl); padding: 60px 48px; text-align: center; color: white; position: relative; overflow: hidden;">
+      <div style="position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:rgba(255,255,255,0.08);border-radius:50%;"></div>
+      <div style="position:absolute;bottom:-40px;left:-40px;width:150px;height:150px;background:rgba(255,255,255,0.06);border-radius:50%;"></div>
+      <div style="position:relative;z-index:1;">
+        <div style="font-size:2.5rem;margin-bottom:16px;">🌿</div>
+        <h2 style="color:white;margin-bottom:16px;">Begin your wellness journey today</h2>
+        <p style="opacity:0.88;max-width:480px;margin:0 auto 32px;font-size:1.05rem;">Take the first step in understanding yourself. The assessment takes only 5 minutes and could offer insights that last a lifetime.</p>
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+          <a href="assessment.html" class="btn" style="background:white;color:var(--teal-dark);font-weight:700;">Start Assessment →</a>
+          <a href="dashboard.html" class="btn" style="background:rgba(255,255,255,0.2);color:white;border:1.5px solid rgba(255,255,255,0.4);">Track My Mood</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="margin-bottom:12px;display:inline-flex;">
+          <div class="nav-logo-icon">🌿</div>
+          Serenity
+        </a>
+        <p>A gentle companion for your mental wellness journey. Built with care. 100% private — all data stays on your device.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Tools</h5>
+        <ul>
+          <li><a href="assessment.html">Self-Assessment</a></li>
+          <li><a href="relationship.html">Relationship Check</a></li>
+          <li><a href="dashboard.html">Mood Dashboard</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <ul>
+          <li><a href="#">Breathing Guide</a></li>
+          <li><a href="#">Sleep Tips</a></li>
+          <li><a href="#">Mindfulness</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Crisis Support</h5>
+        <ul>
+          <li><a href="tel:988">iCall: 9152987821</a></li>
+          <li><a href="#">NIMHANS Helpline</a></li>
+          <li><a href="#">Vandrevala Foundation</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Serenity Wellness App. Not a medical product.</p>
+      <p>💙 Built for mental health awareness</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ CHATBOT ============ -->
+<div class="chatbot-fab">
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+      <div class="chat-avatar">🌿</div>
+      <div class="chat-header-info">
+        <h4>Sage</h4>
+        <p>Your wellness companion</p>
+      </div>
+      <button class="chat-close" id="chatClose">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-quick-replies" id="quickReplies"></div>
+    <div class="chat-input-row">
+      <input type="text" class="chat-input" id="chatInput" placeholder="Type a message..." />
+      <button class="chat-send" id="chatSend">→</button>
+    </div>
+  </div>
+  <button class="chat-toggle-btn" id="chatToggle" title="Chat with Sage">💬</button>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="questions.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
